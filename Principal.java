@@ -1,3 +1,6 @@
+//Manuela Franco Orozco - 1001367953
+//José David Gómez Zapata - 1000203851
+//Daniel ALberto Posada Murillo - 71265203
 import java.util.Scanner;
 public class Principal
 {
