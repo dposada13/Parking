@@ -1,3 +1,8 @@
+import java.text.ParseException;
+import java.util.TimeZone;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 public class Vehiculo{
 
     public static Vehiculo[] vehiculos;
@@ -5,26 +10,35 @@ public class Vehiculo{
     private String placa;
     private String marca;
     private String color;
+    private String date;
+    private String tipoV;
     private int valorComercial;
+    //Date date = new Date();    
 
     public Vehiculo(){
 
     }
 
-    public Vehiculo(String p, String m, String c){       
-        this(p,m,c,30000000);
+    public Vehiculo(String p, String m, String c,String d,String t){       
+        this(p,m,c,d,t,30000000);
     }
 
-    public Vehiculo(String p, String m, String c, int v){
+    public Vehiculo(String p, String m, String c, String d,String t,int v){
         this.placa=p;
         this.marca=m;
         this.color=c;
+        this.date=d;
+        this.tipoV=t;
         this.valorComercial=v;
         this.cantidad=cantidad+1;
     }
 
     public String getPlaca(){
         return this.placa;
+    }
+
+    public String getDate(){
+        return this.date;
     }
 
     public String getMarca(){
@@ -35,6 +49,10 @@ public class Vehiculo{
         return this.color;
     }
 
+    public String getTipoV(){
+        return this.tipoV;
+    }
+
     public int getValorComercial(){
         return this.valorComercial;
     }
@@ -43,8 +61,16 @@ public class Vehiculo{
         this.placa=p;
     }
 
+    public void setDate(String d){
+        this.date=d;
+    }
+
     public void setMarca(String m){
         this.marca=m;
+    }
+
+    public void setTipoV(String t){
+        this.tipoV=t;
     }
 
     public void setColor(String c){
@@ -56,7 +82,7 @@ public class Vehiculo{
     }
 
     public String toString(){
-        return "PLACA: "+this.placa+"\nMARCA: "+this.marca+"\nCOLOR: "+this.color+"\nVALOR COMERCIAL: "+this.valorComercial;
+        return "PLACA: "+this.placa+"\nMARCA: "+this.marca+"\nCOLOR: "+this.color+"\nVALOR COMERCIAL: "+this.valorComercial+"\nFECHA DE INGRESO: "+this.date+"\nTIPO DE VEHICULO: "+this.tipoV+"\n";
     }
 
     public static String toStringVehiculos(){
@@ -64,6 +90,8 @@ public class Vehiculo{
         String marca;
         String color;
         int valorComercial;
+        String d;
+        String tipoV;
         String cadenaVehiculo="";
         for(int i=0; i<vehiculos.length; i++){
             if(vehiculos[i]!=null){
@@ -71,7 +99,9 @@ public class Vehiculo{
                 marca=vehiculos[i].getMarca();
                 color=vehiculos[i].getColor();
                 valorComercial=vehiculos[i].getValorComercial();
-                cadenaVehiculo=cadenaVehiculo+"\nCELDA "+(i+1)+"\nPLACA: "+placa+"\nMARCA: "+marca+"\nCOLOR: "+color+"\nVALOR COMERCIAL: "+valorComercial+"\n";
+                d=vehiculos[i].getDate();
+                tipoV=vehiculos[i].getTipoV();
+                cadenaVehiculo=cadenaVehiculo+"\nCELDA "+(i+1)+"\nPLACA: "+placa+"\nMARCA: "+marca+"\nCOLOR: "+color+"\nVALOR COMERCIAL: "+valorComercial+"\nFECHA DE INGRESO: "+d+"\nTIPO VEHICULO: "+tipoV+"\n";
             }
         }
         return cadenaVehiculo;
@@ -79,7 +109,7 @@ public class Vehiculo{
 
     public static void mostrarVehiculos(){
         for(int i=0; i<vehiculos.length; i++){
-            System.out.println("Vehiculo "+Vehiculo.vehiculos[i].getPlaca()+" "+Vehiculo.vehiculos[i].getMarca()+" "+Vehiculo.vehiculos[i].getColor()+" "+Vehiculo.vehiculos[i].getValorComercial());
+            System.out.println("Vehiculo "+Vehiculo.vehiculos[i].getPlaca()+" "+Vehiculo.vehiculos[i].getMarca()+" "+Vehiculo.vehiculos[i].getColor()+" "+Vehiculo.vehiculos[i].getValorComercial()+" "+vehiculos[i].getDate()+" "+vehiculos[i].getTipoV());
         }
     }
 
@@ -91,7 +121,7 @@ public class Vehiculo{
             if(vehiculos[i]!=null){
                 color=vehiculos[i].getColor();
                 if (color.equalsIgnoreCase(co)){
-                        System.out.println("\nCELDA "+(i++)+"\nPLACA: "+Vehiculo.vehiculos[i].getPlaca()+"\nMARCA: "+Vehiculo.vehiculos[i].getMarca()+"\nCOLOR: "+Vehiculo.vehiculos[i].getColor()+"\nVALOR COMERCIAL: "+Vehiculo.vehiculos[i].getValorComercial());
+                    System.out.println("\nCELDA "+(i++)+"\nPLACA: "+Vehiculo.vehiculos[i].getPlaca()+"\nMARCA: "+Vehiculo.vehiculos[i].getMarca()+"\nCOLOR: "+Vehiculo.vehiculos[i].getColor()+"\nVALOR COMERCIAL: "+Vehiculo.vehiculos[i].getValorComercial()+"\nFECHA DE INGRESO: "+vehiculos[i].getDate()+"TIPO DE VEHICULO"+vehiculos[i].getTipoV()+"\n");
                     cont++;
                 }
             }
@@ -126,12 +156,17 @@ public class Vehiculo{
             }   
         }
         for(int i = 0; i <vehiculosTemp.length; i++){
-            System.out.println("Vehiculo "+(i+1)+": -PLACA:"+vehiculosTemp[i].getPlaca()+" -MARCA:"+vehiculosTemp[i].getMarca()+" -COLOR:"+vehiculosTemp[i].getColor()+" -VALOR COMERCIAL:"+vehiculosTemp[i].getValorComercial());
+            System.out.println("Vehiculo "+(i+1)+": -PLACA:"+vehiculosTemp[i].getPlaca()+" -MARCA:"+vehiculosTemp[i].getMarca()+" -COLOR:"+vehiculosTemp[i].getColor()+" -VALOR COMERCIAL:"+vehiculosTemp[i].getValorComercial()+"\n-FECHA DE INGRESO: "+vehiculos[i].getDate()+"TIPO DE VEHICULO "+vehiculos[i].getTipoV()+"\n");
         }
     }
 
     public static int cantidadVehiculo(){
         return cantidad;
     }
+
+    // public static int obtenerTiempo(int sensor){
+       
+        // return dias;
+    // }
 
 }

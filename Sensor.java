@@ -57,4 +57,9 @@ public class Sensor
             }
         return estado;    
     }
+    
+    
+    public static void desactivarSensor(int ds){
+         
+    }
 }

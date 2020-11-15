@@ -2,6 +2,9 @@
 //José David Gómez Zapata - 1000203851
 //Daniel Alberto Posada Murillo - 71265203
 import java.util.Scanner;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 public class Principal
 {
     public static void main(String [] args)
@@ -10,13 +13,21 @@ public class Principal
 
     }
     public static void mostrarMenu(){
-        Scanner scan = new Scanner(System.in);
+        Date date = new Date();
+        DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
+        String fec=hourdateFormat.format(date);
+        Scanner scan = new Scanner(System.in);      
         int cantCeldas=0, accion=1,contceldas=10, anotacion=0, generico=0, celdas=0,n;
         System.out.println("Bienvenido al programa de gestion de parqueaderos de la Universidad EAFIT ");
         System.out.println("Ingrese la cantidad de celdas a asignar al parqueadero ");
         cantCeldas=scan.nextInt();
         Vehiculo.vehiculos = new Vehiculo[cantCeldas];
-        Sensor.sensores=new Sensor[cantCeldas];        
+        Sensor.sensores=new Sensor[cantCeldas]; 
+        //Valor de parqueo
+        System.out.println("Ingrese la el valor de la hora del parqueo de la moto ");
+        int valorMoto=scan.nextInt();
+        System.out.println("Ingrese la el valor de la hora del parqueo del vehiculo ");
+        int valorVehi=scan.nextInt();        
         //declaracion de arreglos de sensores y vehiculos
         while (accion>0){
             System.out.println(" ");
@@ -35,6 +46,7 @@ public class Principal
                 System.out.println("7 - Mostrar estado del parqueadero");
                 System.out.println("8 - Buscar vehiculos por Color");
                 System.out.println("9 - Mostrar vehiculos por costo Ordenado");
+                System.out.println("10- Desactivar Celda");
                 System.out.println("0 - Salir");
                 n=scan.nextInt();
                 System.out.println(" ");
@@ -79,6 +91,15 @@ public class Principal
                     case 9: 
                     Vehiculo.ordenar();
                     break;
+                    case 10:
+                    System.out.println("Ingrese la celda a desactivar: ");
+                    int celda=scan.nextInt();
+                    if (Sensor.buscarVehiculo(celda)==1){
+                        //CALCULO DEL TIEMPO
+                        System.out.println("LA CELDA YA SE ENCUENTRA DISPONIBLE");
+                    }else{
+                        System.out.println("LA CELDA SE ENCUENTRA DISPONIBLE");
+                    }
                     case 0: 
                     break;
                     default: System.out.println("Comando Incorrecto"); 
