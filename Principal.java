@@ -97,9 +97,7 @@ public class Principal
                     int celda=scan.nextInt();
                     if (Sensor.buscarVehiculo(celda)==1){
                         //CALCULO DEL TIEMPO
-                        System.out.println("LA CELDA YA SE ENCUENTRA DISPONIBLE");
-                    }else{
-                        System.out.println("LA CELDA SE ENCUENTRA DISPONIBLE");
+                        Sensor.desactivarSensor(celda);                      
                     }
                     case 0: 
                     break;

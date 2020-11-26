@@ -1,6 +1,6 @@
+import java.io.*;
 import java.text.ParseException;
-import java.util.TimeZone;
-import java.util.Date;
+import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 public class Vehiculo{
@@ -164,9 +164,46 @@ public class Vehiculo{
         return cantidad;
     }
 
-    // public static int obtenerTiempo(int sensor){
-       
-        // return dias;
-    // }
+    public static void escribirArchivo(String placa,String marca,String color,String date,String tipoV,int valorComercial) {
+        Vehiculo[] vehiculosTemp =new Vehiculo[cantidad];
+        
+        Scanner entradaArchivo=new Scanner(new File("Vehiculos.txt"));
+        
+        for(int i = 0; i <vehiculosTemp.length; i++){
+            System.out.println("Vehiculo "+(i+1)+": -PLACA:"+vehiculosTemp[i].getPlaca()+" -MARCA:"+vehiculosTemp[i].getMarca()+" -COLOR:"+vehiculosTemp[i].getColor()+" -VALOR COMERCIAL:"+vehiculosTemp[i].getValorComercial()+"\n-FECHA DE INGRESO: "+vehiculos[i].getDate()+"TIPO DE VEHICULO "+vehiculos[i].getTipoV()+"\n");
+        }
+        entradaArchivo.close();
+        // FileWriter fichero = null;
+        // PrintWriter pw = null;
+        // Vehiculo[] vehiculosTemp =new Vehiculo[cantidad];
+        // try {
+            // // Dirección de mi máquina donde guardamos nuestro archivo escrito
+            // fichero = new FileWriter("./"+nombreArchivo+".txt");              
+            // pw = new PrintWriter(fichero);
+            // pw.println("Placa : " + placa);
+            // pw.println("Marca : " + marca);
+            // pw.println("Color: " + color);
+            // pw.println("Color: " + date);
+            // pw.println("Color: " + tipoV);
+            // pw.println("Color: " + valorComercial);
+            // pw.println();
+            // pw.println("-- Todas la informacion se almaceno --");
+            // for (int i = 0; i < vehiculosTemp.length; i++) {
+                // //pw.print("Fecha : " + temperaturas.get(i).getKey() + "    ");
+                // pw.println("Vehiculo "+(i+1)+": -PLACA:"+vehiculosTemp[i].getPlaca()+" -MARCA:"+vehiculosTemp[i].getMarca()+" -COLOR:"+vehiculosTemp[i].getColor()+" -VALOR COMERCIAL:"+vehiculosTemp[i].getValorComercial()+"\n-FECHA DE INGRESO: "+vehiculos[i].getDate()+"TIPO DE VEHICULO "+vehiculos[i].getTipoV()+"\n");
+            // }
+
+        // } catch (Exception e) {
+            // e.printStackTrace();
+        // } finally {
+            // try {
+                // if (null != fichero) {
+                    // fichero.close();
+                // }
+            // } catch (Exception e2) {
+                // e2.printStackTrace();
+            // }
+        // }
+    }
 
 }

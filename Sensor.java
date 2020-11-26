@@ -58,8 +58,16 @@ public class Sensor
         return estado;    
     }
     
-    
-    public static void desactivarSensor(int ds){
-         
+    //MALO
+    public static String desactivarSensor(int ds){
+        int estado=Sensor.sensores[ds].getSensor();
+        if (estado==0){
+            sensores[ds].setSensor(1);
+        }
+        return "Cambio realizado";
     }
+    
+    
+
+
 }
