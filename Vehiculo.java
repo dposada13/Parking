@@ -3,6 +3,9 @@ import java.text.ParseException;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Vehiculo{
 
     public static Vehiculo[] vehiculos;
@@ -11,6 +14,7 @@ public class Vehiculo{
     private String marca;
     private String color;
     private String date;
+    private Date date2;
     private String tipoV;
     private int valorComercial;
     //Date date = new Date();    
@@ -28,6 +32,7 @@ public class Vehiculo{
         this.marca=m;
         this.color=c;
         this.date=d;
+        this.date2=new Date();
         this.tipoV=t;
         this.valorComercial=v;
         this.cantidad=cantidad+1;
@@ -39,6 +44,10 @@ public class Vehiculo{
 
     public String getDate(){
         return this.date;
+    }
+    
+    public Date getDate2(){
+        return this.date2;
     }
 
     public String getMarca(){
@@ -164,46 +173,30 @@ public class Vehiculo{
         return cantidad;
     }
 
-    public static void escribirArchivo(String placa,String marca,String color,String date,String tipoV,int valorComercial) {
-        Vehiculo[] vehiculosTemp =new Vehiculo[cantidad];
-        
-        Scanner entradaArchivo=new Scanner(new File("Vehiculos.txt"));
-        
-        for(int i = 0; i <vehiculosTemp.length; i++){
-            System.out.println("Vehiculo "+(i+1)+": -PLACA:"+vehiculosTemp[i].getPlaca()+" -MARCA:"+vehiculosTemp[i].getMarca()+" -COLOR:"+vehiculosTemp[i].getColor()+" -VALOR COMERCIAL:"+vehiculosTemp[i].getValorComercial()+"\n-FECHA DE INGRESO: "+vehiculos[i].getDate()+"TIPO DE VEHICULO "+vehiculos[i].getTipoV()+"\n");
+    public static void escribirArchivo() throws IOException {
+        String placa;
+        String marca;
+        String color;
+        int valorComercial;
+        String d;
+        String tipoV;
+        String cadenaVehiculo="";
+        FileWriter writer = new FileWriter("Vehiculos.txt");        
+        for(int i=0; i<vehiculos.length; i++){
+            if(vehiculos[i]!=null){
+                placa=vehiculos[i].getPlaca();
+                marca=vehiculos[i].getMarca();
+                color=vehiculos[i].getColor();
+                valorComercial=vehiculos[i].getValorComercial();
+                d=vehiculos[i].getDate();
+                tipoV=vehiculos[i].getTipoV();
+                cadenaVehiculo=cadenaVehiculo+"\nCELDA "+(i+1)+"\nPLACA: "+placa+"\nMARCA: "+marca+"\nCOLOR: "+color+"\nVALOR COMERCIAL: "+valorComercial+"\nFECHA DE INGRESO: "+d+"\nTIPO VEHICULO: "+tipoV+"\n";
+            }
         }
-        entradaArchivo.close();
-        // FileWriter fichero = null;
-        // PrintWriter pw = null;
-        // Vehiculo[] vehiculosTemp =new Vehiculo[cantidad];
-        // try {
-            // // Dirección de mi máquina donde guardamos nuestro archivo escrito
-            // fichero = new FileWriter("./"+nombreArchivo+".txt");              
-            // pw = new PrintWriter(fichero);
-            // pw.println("Placa : " + placa);
-            // pw.println("Marca : " + marca);
-            // pw.println("Color: " + color);
-            // pw.println("Color: " + date);
-            // pw.println("Color: " + tipoV);
-            // pw.println("Color: " + valorComercial);
-            // pw.println();
-            // pw.println("-- Todas la informacion se almaceno --");
-            // for (int i = 0; i < vehiculosTemp.length; i++) {
-                // //pw.print("Fecha : " + temperaturas.get(i).getKey() + "    ");
-                // pw.println("Vehiculo "+(i+1)+": -PLACA:"+vehiculosTemp[i].getPlaca()+" -MARCA:"+vehiculosTemp[i].getMarca()+" -COLOR:"+vehiculosTemp[i].getColor()+" -VALOR COMERCIAL:"+vehiculosTemp[i].getValorComercial()+"\n-FECHA DE INGRESO: "+vehiculos[i].getDate()+"TIPO DE VEHICULO "+vehiculos[i].getTipoV()+"\n");
-            // }
-
-        // } catch (Exception e) {
-            // e.printStackTrace();
-        // } finally {
-            // try {
-                // if (null != fichero) {
-                    // fichero.close();
-                // }
-            // } catch (Exception e2) {
-                // e2.printStackTrace();
-            // }
-        // }
+        System.out.println(cadenaVehiculo);
+        writer.write(cadenaVehiculo);
+        writer.close();
+        
     }
 
 }

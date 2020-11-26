@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.io.IOException;
 public class Principal
 {
     public static void main(String [] args)
@@ -95,10 +96,34 @@ public class Principal
                     case 10:
                     System.out.println("Ingrese la celda a desactivar: ");
                     int celda=scan.nextInt();
-                    if (Sensor.buscarVehiculo(celda)==1){
-                        //CALCULO DEL TIEMPO
-                        Sensor.desactivarSensor(celda);                      
+                    if (Sensor.buscarVehiculo(celda)==0){
+                        Date dateFinal = new Date();
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
+                        String fecFinal=dateFormat.format(dateFinal);
+                        Date dateInicial=Vehiculo.vehiculos[celda].getDate2();
+                        double tiempoInicial=dateInicial.getTime();                        
+                        double tiempo=(dateFinal.getTime()-tiempoInicial)/3600000;
+                        double valorTotal=0;
+                        if (Vehiculo.vehiculos[celda].getTipoV().equals("Carro")){
+                            valorTotal=tiempo*valorVehi;
+                        }else{
+                            valorTotal=tiempo*valorMoto;                        
+                        }
+                        System.out.println("Tiempo Total "+tiempo);
+                        System.out.println("Valor a Pagar "+valorTotal);
+                        Sensor.desactivarSensor(celda); 
+                        System.out.println("Sensore desactivado");                        
                     }
+                    break;
+                    case 11: 
+                    try {
+                        Vehiculo.escribirArchivo();
+                    } catch (IOException e) {
+                        System.out.println("Error al escribir el archivo");
+
+                    }
+                    
+                    break;
                     case 0: 
                     break;
                     default: System.out.println("Comando Incorrecto"); 
@@ -111,5 +136,6 @@ public class Principal
             }
         }
     }
+
 
 }

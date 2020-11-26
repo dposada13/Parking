@@ -34,7 +34,7 @@ public class Sensor
         String sensorDispo="";
         for (int i=0;i<sensores.length;i++){
             if(sensores[i]== null){
-                sensorDispo=sensorDispo+"Parqueadero "+(i+1)+" Libre"+"\n";                
+                sensorDispo=sensorDispo+"Parqueadero "+(i)+" Libre"+"\n";                
             }        
         } 
         return sensorDispo;
@@ -58,14 +58,16 @@ public class Sensor
         return estado;    
     }
     
-    //MALO
     public static String desactivarSensor(int ds){
         int estado=Sensor.sensores[ds].getSensor();
+        
         if (estado==0){
-            sensores[ds].setSensor(1);
+            Sensor.sensores[ds]=null;
+            Vehiculo.vehiculos[ds]=null;
         }
         return "Cambio realizado";
     }
+    
     
     
 
