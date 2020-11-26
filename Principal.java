@@ -12,6 +12,7 @@ public class Principal
         mostrarMenu();  
 
     }
+
     public static void mostrarMenu(){
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
